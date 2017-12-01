@@ -1,0 +1,62 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="_isCollapsed" [nzBreakpoint]="'sm'"
+            (nzCollapsedChange)="notifyLogoState($event)">
+    <div class="logo" >
+      <h2 [hidden]="!_isShowLogo">后台管理系统</h2>
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="_isCollapsed?'vertical':'inline'">
+    <li nz-submenu [nzOpen]="(i == 0)" *ngFor="let menu of menuList ; let i = index">
+        <span title><i class="{{menu.icon}}"></i><span class="nav-text">{{menu.menuName}}</span></span>
+        <ul>
+          <li nz-menu-item *ngFor="let childMenu of menu.children" routerLinkActive="ant-menu-item-selected" routerLink="{{childMenu.path}}"><i class="{{childMenu.icon}}"></i>{{childMenu.menuName}}</li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div nz-row>
+        <div nz-col [nzSpan]="4">
+          <i class="anticon trigger" [class.anticon-menu-fold]="!_isCollapsed" [class.anticon-menu-unfold]="_isCollapsed"
+             (click)="_isCollapsed=!_isCollapsed;_isShowLogo=!_isShowLogo"></i>
+        </div>
+
+        <div nz-col [nzSpan]="2" [nzOffset]="16">
+          <nz-badge [nzCount]="5">
+            <ng-template #content>
+              <nz-avatar nzIcon="user" [nzShape]="'square'"></nz-avatar>
+            </ng-template>
+          </nz-badge>
+        </div>
+        <div nz-col [nzSpan]="2">
+          <nz-dropdown>
+            <a class="ant-dropdown-link" nz-dropdown>
+              gongxufan <i class="anticon anticon-down"></i>
+            </a>
+            <ul nz-menu>
+              <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">用户中心</a>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">退出系统</a>
+              </li>
+
+            </ul>
+          </nz-dropdown>
+        </div>
+      </div>
+    </nz-header>
+    <nz-back-top [nzVisibilityHeight]="20"></nz-back-top>
+    <nz-content style="margin:0 16px;">
+      <app-breadcrumb></app-breadcrumb>
+      <div style=" background: #fff; min-height: 500px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+
+
+    <nz-footer style="text-align: center;">biz-admin ©2017 Implement By Angular</nz-footer>
+
+  </nz-layout>
+</nz-layout>

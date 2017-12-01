@@ -1,0 +1,6 @@
+<nz-breadcrumb style="margin:12px 0;">
+  <nz-breadcrumb-item>
+    <a routerLink=""><i class="anticon anticon-home"></i></a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngFor="let router of routerPath"><a routerLink="{{router.data.url}}">{{router.data.title}}</a></nz-breadcrumb-item>
+</nz-breadcrumb>
